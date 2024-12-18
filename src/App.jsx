@@ -8,16 +8,11 @@ import { Modal } from './cmp/Modal';
 function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currentEditToy, setCurrentEditToy] = useState(null)
   useEffect(() => {
     getFireStoreData()
   }, [toys])
 
-  const openModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
 
   const getFireStoreData = async () => {
     try {
@@ -39,12 +34,12 @@ function App() {
 
   return (
     <div className="relative">
-      {isModalOpen && <Modal closeModal={closeModal} />}
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} />}
       <main
         className={`bg-zinc-200 z-0 h-screen ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <h1 className="text-4xl text-center">Firestore Application</h1>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
-        <ToyList toys={toys} openModal={openModal} />
+        <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />
         <Form />
       </main>
     </div>
