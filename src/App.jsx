@@ -12,8 +12,6 @@ function App() {
   useEffect(() => {
     getFireStoreData()
   }, [toys])
-
-
   const getFireStoreData = async () => {
     try {
       const ref = collection(dbFireStore, "toys")
