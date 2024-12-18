@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { dbFireStore } from './config/firebase'
 import { useEffect, useState } from 'react'
 import { Form } from './cmp/form'
@@ -15,7 +15,9 @@ function App() {
   const getFireStoreData = async () => {
     try {
       const ref = collection(dbFireStore, "toys")
-      const snapshot = await getDocs(ref)
+      //sort by ABC
+      const q = query(ref, orderBy('name'))
+      const snapshot = await getDocs(q)
       // console.log(snapshot.docs)
       const toysArray = []
       snapshot.forEach((item) => {
