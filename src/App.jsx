@@ -29,6 +29,7 @@ function App() {
   return (
     <main className='bg-zinc-200 h-screen'>
       <h1 className='text-4xl text-center'>Firestore Application</h1>
+      <h2 className='text-3xl text-center mt-3'>Toys Collection:</h2>
       <ul className='flex flex-col items-center mt-4'>
         {toys.map((toy) => {
           return (
