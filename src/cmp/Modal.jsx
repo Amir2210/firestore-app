@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { collection, addDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 
-export function Modal({ closeModal }) {
+export function Modal({ setIsModalOpen, currentEditToy }) {
   let inputRef = useRef(null)
   let priceRef = useRef(null)
   let infoRef = useRef(null)
@@ -13,24 +13,26 @@ export function Modal({ closeModal }) {
       e.preventDefault()
       return
     }
+
     e.preventDefault()
-    const newToy = {
+    const newUpdateToy = {
       name: inputRef.current.value,
       price: +priceRef.current.value,
       info: infoRef.current.value,
-      _id: Date.now()
+      _id: currentEditToy._id
     }
+
     try {
-      const ref = collection(dbFireStore, 'toys')
-      const data = await addDoc(ref, newToy)
+      const ref = doc(dbFireStore, 'toys', currentEditToy.id)
+      const data = await updateDoc(ref, newUpdateToy)
     } catch (error) {
-      alert('cant add new toy to database')
+      alert('cant update toy to database')
       console.log(error, 'ERROR!')
     }
     inputRef.current.value = ''
     priceRef.current.value = ''
     infoRef.current.value = ''
-    closeModal()
+    setIsModalOpen(false)
   }
 
   return (
@@ -40,16 +42,16 @@ export function Modal({ closeModal }) {
         <form onSubmit={handleSubmit} className='text-gray-700 mb-6'>
           <div className='flex items-center gap-5 justify-center mt-5'>
             <label htmlFor="name">name:</label>
-            <input type="text" ref={inputRef} />
+            <input defaultValue={currentEditToy.name} type="text" ref={inputRef} />
 
             <label htmlFor="price">price:</label>
-            <input type="number" ref={priceRef} />
+            <input defaultValue={currentEditToy.price} type="number" ref={priceRef} />
 
             <label htmlFor="info">info:</label>
-            <input type="text" ref={infoRef} />
+            <input defaultValue={currentEditToy.info} type="text" ref={infoRef} />
           </div>
           <div className="flex justify-end space-x-4 mt-4">
-            <button onClick={closeModal} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+            <button type='button' onClick={() => setIsModalOpen(false)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
               Close
             </button>
             <button type='submit' className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">

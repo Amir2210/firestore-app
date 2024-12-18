@@ -3,7 +3,7 @@ import { MdEdit } from "react-icons/md";
 import { doc, deleteDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 
-export function ToyPreview({ toy, openModal }) {
+export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy }) {
 
   async function onDeleteToy() {
     try {
@@ -22,7 +22,11 @@ export function ToyPreview({ toy, openModal }) {
       <h3>info:  {toy.info}</h3>
       <div className=' flex gap-2 items-center'>
         <button onClick={onDeleteToy} className='text-red-600'><IoTrashBin /></button>
-        <button onClick={openModal} className='text-blue-600'><MdEdit />
+        <button onClick={() => {
+          setIsModalOpen(true)
+          setCurrentEditToy(toy)
+        }
+        } className='text-blue-600'><MdEdit />
         </button>
       </div>
     </li>
