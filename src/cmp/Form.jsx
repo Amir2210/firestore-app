@@ -1,0 +1,40 @@
+import { useRef } from 'react'
+import { collection, addDoc } from 'firebase/firestore'
+import { dbFireStore } from '../config/firebase'
+export function Form() {
+  const inputRef = useRef(null)
+  const priceRef = useRef(null)
+  const infoRef = useRef(null)
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const newToy = {
+      name: inputRef.current.value,
+      price: +priceRef.current.value,
+      info: infoRef.current.value
+    }
+    try {
+      const ref = collection(dbFireStore, 'toys')
+      const data = await addDoc(ref, newToy)
+    } catch (error) {
+      alert('cant add new toy to database')
+      console.log(error, 'ERROR!')
+    }
+
+  }
+  return (
+    <form onSubmit={handleSubmit} className=''>
+      <h1 className='text-center text-5xl'>Add a new toy form:</h1>
+      <div className='flex items-center gap-5 justify-center mt-5'>
+        <label htmlFor="name">name:</label>
+        <input type="text" ref={inputRef} />
+
+        <label htmlFor="price">price:</label>
+        <input type="number" ref={priceRef} />
+
+        <label htmlFor="info">info:</label>
+        <input type="text" ref={infoRef} />
+      </div>
+      <button type='submit' className='bg-zinc-400 px-2 py-4 rounded-md my-5 flex mx-auto'>Add new Toy</button>
+    </form>
+  )
+}

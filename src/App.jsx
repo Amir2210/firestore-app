@@ -1,13 +1,14 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { dbFireStore } from './config/firebase'
 import { useEffect, useState } from 'react'
+import { Form } from './cmp/form'
 function App() {
 
   const [toys, setToys] = useState([])
 
   useEffect(() => {
     getFireStoreData()
-  }, [])
+  }, [toys])
 
   const getFireStoreData = async () => {
     try {
@@ -39,6 +40,7 @@ function App() {
           )
         })}
       </ul>
+      <Form />
     </main>
   )
 }
