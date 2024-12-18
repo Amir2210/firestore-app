@@ -15,7 +15,8 @@ export function Form() {
     const newToy = {
       name: inputRef.current.value,
       price: +priceRef.current.value,
-      info: infoRef.current.value
+      info: infoRef.current.value,
+      _id: Date.now()
     }
     try {
       const ref = collection(dbFireStore, 'toys')

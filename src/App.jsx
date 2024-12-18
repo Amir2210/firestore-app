@@ -15,8 +15,8 @@ function App() {
   const getFireStoreData = async () => {
     try {
       const ref = collection(dbFireStore, "toys")
-      //sort by ABC
-      const q = query(ref, orderBy('name'))
+      //sort by last added
+      const q = query(ref, orderBy('_id', 'desc'))
       const snapshot = await getDocs(q)
       // console.log(snapshot.docs)
       const toysArray = []
