@@ -28,11 +28,13 @@ function App() {
   return (
     <main className='bg-zinc-200 h-screen'>
       <h1 className='text-4xl text-center'>Firestore Application</h1>
-      <ul>
+      <ul className='flex flex-col items-center mt-4'>
         {toys.map((toy) => {
           return (
-            <li key={toy.id}>
-              <h1>{toy.name}</h1>
+            <li key={toy.id} className='flex gap-5 capitalize bg-yellow-50 p-4 text-xl rounded-sm mb-4'>
+              <h1>toy name: {toy.name}</h1>
+              <h2>price: <span className='font-bold'>{toy.price}₪ NIS</span></h2>
+              <h3>info:  {toy.info}</h3>
             </li>
           )
         })}
