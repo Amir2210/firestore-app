@@ -2,6 +2,8 @@ import { collection, getDocs } from 'firebase/firestore'
 import { dbFireStore } from './config/firebase'
 import { useEffect, useState } from 'react'
 import { Form } from './cmp/form'
+import { IoTrashBin } from "react-icons/io5";
+
 function App() {
 
   const [toys, setToys] = useState([])
@@ -33,10 +35,13 @@ function App() {
       <ul className='flex flex-col items-center mt-4'>
         {toys.map((toy) => {
           return (
-            <li key={toy.id} className='flex gap-5 capitalize bg-yellow-50 p-4 text-xl rounded-sm mb-4'>
+            <li key={toy.id} className='flex items-center gap-5 capitalize bg-yellow-50 p-4 text-xl rounded-sm mb-4'>
               <h1>toy name: {toy.name}</h1>
               <h2>price: <span className='font-bold'>{toy.price}₪ NIS</span></h2>
               <h3>info:  {toy.info}</h3>
+              <div className='bg-zinc-200 flex items-center'>
+                <button className='text-red-600'><IoTrashBin /></button>
+              </div>
             </li>
           )
         })}
