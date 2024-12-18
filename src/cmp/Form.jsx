@@ -2,10 +2,15 @@ import { useRef } from 'react'
 import { collection, addDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 export function Form() {
-  const inputRef = useRef(null)
-  const priceRef = useRef(null)
-  const infoRef = useRef(null)
+  let inputRef = useRef(null)
+  let priceRef = useRef(null)
+  let infoRef = useRef(null)
   async function handleSubmit(e) {
+    if (!inputRef.current.value || !priceRef.current.value || !infoRef.current.value) {
+      alert('enter valid inputs pls')
+      e.preventDefault()
+      return
+    }
     e.preventDefault()
     const newToy = {
       name: inputRef.current.value,
@@ -19,7 +24,9 @@ export function Form() {
       alert('cant add new toy to database')
       console.log(error, 'ERROR!')
     }
-
+    inputRef.current.value = ''
+    priceRef.current.value = ''
+    infoRef.current.value = ''
   }
   return (
     <form onSubmit={handleSubmit} className=''>
