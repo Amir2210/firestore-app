@@ -31,9 +31,9 @@ function App() {
       <ul>
         {toys.map((toy) => {
           return (
-            <div key={toy.id}>
+            <li key={toy.id}>
               <h1>{toy.name}</h1>
-            </div>
+            </li>
           )
         })}
       </ul>
