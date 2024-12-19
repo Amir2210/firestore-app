@@ -13,7 +13,7 @@ export function Signup() {
       const password = passwordRef.current.value
       const data = await signup(email, password)
       if (data.email) {
-        alert('Success Signup, now log in!')
+        alert('Success Signup')
       }
     } catch (error) {
       console.log(error, 'ERROR!')

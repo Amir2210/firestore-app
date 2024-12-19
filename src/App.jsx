@@ -1,17 +1,19 @@
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
-import { dbFireStore } from './config/firebase'
+import { auth, dbFireStore } from './config/firebase'
 import { useEffect, useState } from 'react'
 import { Form } from './cmp/form'
 import { ToyList } from './cmp/toysList';
 import { Modal } from './cmp/Modal';
 import { Link } from 'react-router-dom';
 import { useFireAuthContext } from './config/FireAuthContext';
+import { useLogoutFire } from './config/firebaseAuthHooks';
 
 function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
   const { userFire } = useFireAuthContext()
+  const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
   }, [toys])
@@ -43,7 +45,7 @@ function App() {
           {userFire?.email ?
             <div className='flex gap-5'>
               <h1>hello: {userFire.email}</h1>
-              <button>logout</button>
+              <button onClick={async () => logout()}>logout</button>
             </div>
             : <div className='gap-5 flex'>
               <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>

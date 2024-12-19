@@ -39,3 +39,20 @@ export const useLoginFire = (auth) => {
 
   return { error, login }
 }
+
+export const useLogoutFire = (auth) => {
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      console.log("logged out")
+      return "log out"
+
+    }
+    catch (err) {
+      console.log(err.message)
+    }
+  }
+
+
+  return { logout }
+}
