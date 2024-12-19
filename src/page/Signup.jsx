@@ -11,7 +11,10 @@ export function Signup() {
       e.preventDefault()
       const email = mailRef.current.value
       const password = passwordRef.current.value
-      await signup(email, password)
+      const data = await signup(email, password)
+      if (data.email) {
+        alert('Success Signup, now log in!')
+      }
     } catch (error) {
       console.log(error, 'ERROR!')
     }

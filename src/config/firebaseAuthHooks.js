@@ -21,3 +21,21 @@ export const useSignupFire = (auth) => {
 
   return { error, signup }
 }
+
+export const useLoginFire = (auth) => {
+  const [error, setError] = useState(null);
+  const login = async (email, password) => {
+    try {
+      setError(null);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      console.log("user logged in:", res.user);
+      return res.user;
+    }
+    catch (err) {
+      setError(err.message);
+    }
+  }
+
+
+  return { error, login }
+}
