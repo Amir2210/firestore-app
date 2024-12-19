@@ -1,10 +1,12 @@
 import { useRef } from 'react'
 import { auth } from '../config/firebase'
 import { useSignupFire } from '../config/firebaseAuthHooks'
+import { useNavigate } from 'react-router-dom'
 export function Signup() {
   const mailRef = useRef(null)
   const passwordRef = useRef(null)
   const { error, signup } = useSignupFire(auth)
+  const navigate = useNavigate()
 
   const onSub = async (e) => {
     try {
@@ -14,6 +16,7 @@ export function Signup() {
       const data = await signup(email, password)
       if (data.email) {
         alert('Success Signup')
+        navigate('/')
       }
     } catch (error) {
       console.log(error, 'ERROR!')
