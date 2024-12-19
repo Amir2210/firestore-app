@@ -5,11 +5,13 @@ import { Form } from './cmp/form'
 import { ToyList } from './cmp/toysList';
 import { Modal } from './cmp/Modal';
 import { Link } from 'react-router-dom';
+import { useFireAuthContext } from './config/FireAuthContext';
 
 function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
+  const { userFire } = useFireAuthContext()
   useEffect(() => {
     getFireStoreData()
   }, [toys])
@@ -38,8 +40,15 @@ function App() {
         className={`bg-zinc-200 z-0 h-screen ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <div className='flex gap-5 justify-center items-center pt-4'>
           <h1 className="text-4xl">Firestore Application</h1>
-          <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>
-          <Link className='bg-blue-400 capitalize p-2 py-3 rounded-md' to={'/login'}>log in</Link>
+          {userFire?.email ?
+            <div className='flex gap-5'>
+              <h1>hello: {userFire.email}</h1>
+              <button>logout</button>
+            </div>
+            : <div className='gap-5 flex'>
+              <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>
+              <Link className='bg-blue-400 capitalize p-2 py-3 rounded-md' to={'/login'}>log in</Link>
+            </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
         <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />
