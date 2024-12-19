@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Form } from './cmp/form'
 import { ToyList } from './cmp/toysList';
 import { Modal } from './cmp/Modal';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [toys, setToys] = useState([])
@@ -35,7 +36,10 @@ function App() {
       {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} />}
       <main
         className={`bg-zinc-200 z-0 h-screen ${isModalOpen ? "blur-sm" : "blur-none"}`}>
-        <h1 className="text-4xl text-center">Firestore Application</h1>
+        <div className='flex gap-5 justify-center items-center pt-4'>
+          <h1 className="text-4xl">Firestore Application</h1>
+          <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>
+        </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
         <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />
         <Form />
