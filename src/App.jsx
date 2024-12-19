@@ -45,7 +45,7 @@ function App() {
           {userFire?.email ?
             <div className='flex gap-5'>
               <h1>hello: {userFire.email}</h1>
-              <button onClick={async () => logout()}>logout</button>
+              <button onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
             </div>
             : <div className='gap-5 flex'>
               <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>
