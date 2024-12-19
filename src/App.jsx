@@ -39,6 +39,7 @@ function App() {
         <div className='flex gap-5 justify-center items-center pt-4'>
           <h1 className="text-4xl">Firestore Application</h1>
           <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>
+          <Link className='bg-blue-400 capitalize p-2 py-3 rounded-md' to={'/login'}>log in</Link>
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
         <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />
