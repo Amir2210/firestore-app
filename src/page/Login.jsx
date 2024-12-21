@@ -22,14 +22,15 @@ export function Login() {
     }
   }
   return (
-    <main className='bg-zinc-200 z-0 h-screen'>
-      <form onSubmit={onSub}>
+    <main className='bg-zinc-200 z-0 h-screen flex flex-col items-center justify-center'>
+      <h1 className='text-5xl my-6'>Log in</h1>
+      <form onSubmit={onSub} className='flex flex-col items-center py-8  text-3xl'>
         <label htmlFor="email">Email:</label>
-        <input ref={mailRef} type="email" />
+        <input ref={mailRef} type="email" className='mx-2' />
         <label htmlFor="password">Password:</label>
-        <input ref={passwordRef} type="text" />
+        <input ref={passwordRef} type="text" className='mx-2' />
         <h2 className='text-red-500'>{error}</h2>
-        <button>Login</button>
+        <button className='bg-blue-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Login</button>
       </form>
 
     </main>
