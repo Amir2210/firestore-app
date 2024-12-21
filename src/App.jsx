@@ -48,8 +48,8 @@ function App() {
               <button onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
             </div>
             : <div className='gap-5 flex'>
-              <Link className='bg-green-400 capitalize p-2 py-3 rounded-md' to={'/signup'}>singup</Link>
-              <Link className='bg-blue-400 capitalize p-2 py-3 rounded-md' to={'/login'}>log in</Link>
+              <Link className='bg-green-400 capitalize p-2 py-3 rounded-md text-white text-xl' to={'/signup'}>singup</Link>
+              <Link className='bg-blue-400 capitalize p-2 py-3 rounded-md text-white text-xl' to={'/login'}>log in</Link>
             </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
