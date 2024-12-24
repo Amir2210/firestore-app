@@ -60,6 +60,7 @@ function App() {
             </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
+        {!toys ? <div className='text-4xl'>Loading...</div>: null}
         <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />
         <Form />
       </main>
