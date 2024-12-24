@@ -41,7 +41,7 @@ function App() {
       <main
         className={`bg-zinc-200 z-0 h-screen ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <div className='flex gap-5 justify-center items-center pt-4'>
-          <h1 className="text-4xl">Firestore Application</h1>
+          <h1 className="text-4xl">Firestore Application🔥</h1>
           {userFire?.email ?
             <div className='flex gap-5'>
               <h1>hello: {userFire.email}</h1>
