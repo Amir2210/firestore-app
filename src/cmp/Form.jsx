@@ -42,7 +42,7 @@ export function Form() {
         <label htmlFor="info">info:</label>
         <input type="text" ref={infoRef} />
       </div>
-      <button type='submit' className='bg-zinc-400 px-2 py-4 rounded-md my-5 flex mx-auto'>Add new Toy</button>
+      <button type='submit' className='bg-sky-400 px-2 my-5 flex mx-auto capitalize p-2 py-3 rounded-md text-white text-xl'>Add new Toy</button>
     </form>
   )
 }
