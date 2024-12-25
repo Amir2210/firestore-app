@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn {
+      @apply capitalize p-2 py-3 rounded-md text-white text-xl;
+    }
+}

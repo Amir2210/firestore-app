@@ -52,16 +52,15 @@ function App() {
           {userFire?.email ?
             <div className='flex gap-5 items-center'>
               <h3 className='text-xl'>Hello: <span className='font-bold capitalize'>{greetUser()}</span></h3>
-              <button className='bg-red-400 capitalize p-2 py-3 rounded-md text-white text-xl' onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
+              <button className='bg-red-400 btn' onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
             </div>
             : <div className='gap-5 flex'>
-              <Link className='bg-green-400 capitalize p-2 py-3 rounded-md text-white text-xl' to={'/signup'}>singup</Link>
-              <Link className='bg-blue-400 capitalize p-2 py-3 rounded-md text-white text-xl' to={'/login'}>log in</Link>
+              <Link className='bg-green-400 btn' to={'/signup'}>singup</Link>
+              <Link className='bg-blue-400 btn' to={'/login'}>log in</Link>
             </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
-        {!toys ? <div className='text-4xl'>Loading...</div>: null}
-        <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />
+        {!toys ? <div className='text-4xl'>Loading...</div>: <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />} 
         <Form />
       </main>
     </div>
