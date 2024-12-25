@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div className="relative">
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} />}
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId}/>}
       <main
         className={`bg-zinc-200 z-0 h-screen ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <div className='flex gap-5 justify-center items-center pt-4'>

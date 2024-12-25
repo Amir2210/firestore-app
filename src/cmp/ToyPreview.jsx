@@ -7,7 +7,7 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId }) {
 
   async function onDeleteToy() {
     if(userId !== toy.userId){
-      alert('You are not the ownwer of this toy')
+      alert('You are not the owner of this toy')
       return
     }
     try {
@@ -27,6 +27,10 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId }) {
       <div className=' flex gap-2 items-center'>
         <button onClick={onDeleteToy} className='text-red-600'><IoTrashBin /></button>
         <button onClick={() => {
+          if(userId !== toy.userId){
+            alert('You are not the owner of this toy')
+            return
+          }
           setIsModalOpen(true)
           setCurrentEditToy(toy)
         }

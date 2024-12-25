@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 
-export function Modal({ setIsModalOpen, currentEditToy }) {
+export function Modal({ setIsModalOpen, currentEditToy, userId }) {
   let inputRef = useRef(null)
   let priceRef = useRef(null)
   let infoRef = useRef(null)
@@ -10,6 +10,12 @@ export function Modal({ setIsModalOpen, currentEditToy }) {
   async function handleSubmit(e) {
     if (!inputRef.current.value || !priceRef.current.value || !infoRef.current.value) {
       alert('enter valid inputs pls')
+      e.preventDefault()
+      return
+    }
+
+    if(userId !== currentEditToy.userId){
+      alert('You are not the owner of this toy')
       e.preventDefault()
       return
     }
