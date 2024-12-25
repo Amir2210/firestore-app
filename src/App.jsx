@@ -13,6 +13,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
   const { userFire } = useFireAuthContext()
+  const userId = userFire?.uid
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
@@ -61,7 +62,7 @@ function App() {
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
         {!toys ? <div className='text-4xl'>Loading...</div>: <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} />} 
-        <Form />
+        <Form userId={userId}/>
       </main>
     </div>
 

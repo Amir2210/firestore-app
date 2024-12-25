@@ -1,13 +1,19 @@
 import { useRef } from 'react'
 import { collection, addDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
-export function Form() {
+export function Form({userId}) {
   let inputRef = useRef(null)
   let priceRef = useRef(null)
   let infoRef = useRef(null)
+
   async function handleSubmit(e) {
     if (!inputRef.current.value || !priceRef.current.value || !infoRef.current.value) {
       alert('enter valid inputs pls')
+      e.preventDefault()
+      return
+    }
+    if(!userId){
+      alert('you must login to add a new Toy!')
       e.preventDefault()
       return
     }
@@ -16,7 +22,8 @@ export function Form() {
       name: inputRef.current.value,
       price: +priceRef.current.value,
       info: infoRef.current.value,
-      _id: Date.now()
+      _id: Date.now(),
+      userId
     }
     try {
       const ref = collection(dbFireStore, 'toys')
@@ -29,6 +36,7 @@ export function Form() {
     priceRef.current.value = ''
     infoRef.current.value = ''
   }
+
   return (
     <form onSubmit={handleSubmit} className=''>
       <h1 className='text-center text-5xl'>Add a new toy form:</h1>
