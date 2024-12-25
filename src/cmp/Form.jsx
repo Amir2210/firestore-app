@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { collection, addDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
-export function Form({userId}) {
+export function Form({userId, userName}) {
   let inputRef = useRef(null)
   let priceRef = useRef(null)
   let infoRef = useRef(null)
@@ -23,7 +23,8 @@ export function Form({userId}) {
       price: +priceRef.current.value,
       info: infoRef.current.value,
       _id: Date.now(),
-      userId
+      userId,
+      userName
     }
     try {
       const ref = collection(dbFireStore, 'toys')

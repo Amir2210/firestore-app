@@ -5,12 +5,12 @@ export const AuthContext = createContext(null);
 
 
 export default function AuthProvider({ children, auth }) {
-  const [userFire, setUserFire] = useState({});
+  const [userFire, setUserFire] = useState({})
 
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("user logged in", user);
+        console.log("user logged in", user)
         setUserFire(user)
       }
       else {
