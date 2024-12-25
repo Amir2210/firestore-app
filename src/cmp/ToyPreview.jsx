@@ -3,9 +3,13 @@ import { MdEdit } from "react-icons/md";
 import { doc, deleteDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 
-export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy }) {
+export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId }) {
 
   async function onDeleteToy() {
+    if(userId !== toy.userId){
+      alert('You are not the ownwer of this toy')
+      return
+    }
     try {
       const ref = doc(dbFireStore, 'toys', toy.id)
       const data = await deleteDoc(ref)
