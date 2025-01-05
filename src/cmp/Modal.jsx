@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 
-export function Modal({ setIsModalOpen, currentEditToy, userId }) {
+export function Modal({ setIsModalOpen, currentEditToy, userId, getFireStoreData }) {
   let inputRef = useRef(null)
   let priceRef = useRef(null)
   let infoRef = useRef(null)
@@ -14,7 +14,7 @@ export function Modal({ setIsModalOpen, currentEditToy, userId }) {
       return
     }
 
-    if(userId !== currentEditToy.userId){
+    if (userId !== currentEditToy.userId) {
       alert('You are not the owner of this toy')
       e.preventDefault()
       return
@@ -31,6 +31,7 @@ export function Modal({ setIsModalOpen, currentEditToy, userId }) {
     try {
       const ref = doc(dbFireStore, 'toys', currentEditToy.id)
       const data = await updateDoc(ref, newUpdateToy)
+      getFireStoreData()
     } catch (error) {
       alert('cant update toy to database')
       console.log(error, 'ERROR!')

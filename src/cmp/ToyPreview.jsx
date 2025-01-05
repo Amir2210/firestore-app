@@ -3,7 +3,7 @@ import { MdEdit } from "react-icons/md";
 import { doc, deleteDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
 
-export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId }) {
+export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, getFireStoreData }) {
 
   async function onDeleteToy() {
     if (userId !== toy.userId) {
@@ -13,6 +13,7 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId }) {
     try {
       const ref = doc(dbFireStore, 'toys', toy.id)
       const data = await deleteDoc(ref)
+      getFireStoreData()
     } catch (error) {
       alert('sorry cant delete toy try again later...')
       console.log('error:', error)

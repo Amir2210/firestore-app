@@ -13,11 +13,11 @@ function App() {
   const [currentEditToy, setCurrentEditToy] = useState(null)
   const { userFire } = useFireAuthContext()
   const userId = userFire?.uid
-  const userName = userFire?.email ? getNameFromEmail() : ''
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
-  }, [toys])
+  }, [])
+
   const getFireStoreData = async () => {
     try {
       const ref = collection(dbFireStore, "toys")
@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div className="relative">
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId} />}
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
       <main
         className={`bg-zinc-200 z-0 sm:h-screen px-3 mx-auto ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <div className='flex flex-col gap-5 justify-center items-center pt-4'>
@@ -62,7 +62,7 @@ function App() {
             </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
-        {!toys ? <div className='text-4xl'>Loading...</div> : <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} />}
+        {!toys ? <div className='text-4xl'>Loading...</div> : <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
       </main>
     </div>
 
