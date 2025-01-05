@@ -1,7 +1,6 @@
 import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { auth, dbFireStore } from './config/firebase'
 import { useEffect, useState } from 'react'
-import { Form } from './cmp/form'
 import { ToyList } from './cmp/toysList';
 import { Modal } from './cmp/Modal';
 import { Link } from 'react-router-dom';
@@ -37,7 +36,7 @@ function App() {
     }
   }
 
-  function greetUser(){
+  function greetUser() {
     let greet = ''
     const index = userFire.email.indexOf('@')
     greet += userFire.email.slice(0, index)
@@ -46,15 +45,16 @@ function App() {
 
   return (
     <div className="relative">
-      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId}/>}
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId} />}
       <main
-        className={`bg-zinc-200 z-0 h-screen ${isModalOpen ? "blur-sm" : "blur-none"}`}>
-        <div className='flex gap-5 justify-center items-center pt-4'>
-          <h1 className="text-4xl">Firestore Application🔥</h1>
+        className={`bg-zinc-200 z-0 sm:h-screen px-3 mx-auto ${isModalOpen ? "blur-sm" : "blur-none"}`}>
+        <div className='flex flex-col gap-5 justify-center items-center pt-4'>
+          <h1 className="text-3xl">Firestore Application🔥</h1>
           {userFire?.email ?
-            <div className='flex gap-5 items-center'>
+            <div className='flex flex-col sm:flex-row gap-5 items-center'>
               <h3 className='text-xl'>Hello: <span className='font-bold capitalize'>{greetUser()}</span></h3>
               <button className='bg-red-400 btn' onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
+              <Link className='bg-emerald-400 btn' to={'/addToy'}>Add a new Toy</Link>
             </div>
             : <div className='gap-5 flex'>
               <Link className='bg-green-400 btn' to={'/signup'}>singup</Link>
@@ -62,8 +62,7 @@ function App() {
             </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
-        {!toys ? <div className='text-4xl'>Loading...</div>: <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId}/>} 
-        <Form userId={userId} userName={userName}/>
+        {!toys ? <div className='text-4xl'>Loading...</div> : <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} />}
       </main>
     </div>
 
