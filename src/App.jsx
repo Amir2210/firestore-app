@@ -6,12 +6,14 @@ import { Modal } from './cmp/Modal';
 import { Link } from 'react-router-dom';
 import { useFireAuthContext } from './config/FireAuthContext';
 import { useLogoutFire } from './config/firebaseAuthHooks';
+import { FilterToy } from './cmp/FilterToy';
 
 function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
-  const { userFire } = useFireAuthContext()
+  const { userFire, toyFilter, setToyFilter } = useFireAuthContext()
+  console.log('toyFilter:', toyFilter)
   const userId = userFire?.uid
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
@@ -62,6 +64,7 @@ function App() {
             </div>}
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
+        <FilterToy />
         {!toys ? <div className='text-4xl'>Loading...</div> : <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
       </main>
     </div>

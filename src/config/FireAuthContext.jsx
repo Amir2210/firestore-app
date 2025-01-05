@@ -6,6 +6,7 @@ export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children, auth }) {
   const [userFire, setUserFire] = useState({})
+  const [toyFilter, setToyFilter] = useState('')
 
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -21,7 +22,9 @@ export default function AuthProvider({ children, auth }) {
   }, [])
 
   const globalVal = {
-    userFire
+    userFire,
+    toyFilter,
+    setToyFilter
   }
 
   return (
