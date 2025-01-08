@@ -21,7 +21,7 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
   }
 
   return (
-    <li className='w-full min-h-44 justify-center flex flex-col items-center gap-5 capitalize bg-yellow-50 p-4 text-xl rounded-sm mb-4'>
+    <li className='w-full min-h-44 justify-center flex flex-col items-center gap-5 capitalize bg-yellow-50 p-4 text-xl rounded-md shadow-md mb-4'>
       <h1>owner: {toy.userName}</h1>
       <h1>toy name: {toy.name}</h1>
       <h2>price: <span className='font-bold'>{toy.price}₪ NIS</span></h2>
