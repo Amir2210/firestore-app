@@ -50,6 +50,8 @@ function App() {
     greet += userFire.email.slice(0, index)
     return greet
   }
+  console.log('toys:', toys)
+
 
   return (
     <div className="relative">
@@ -71,7 +73,7 @@ function App() {
         </div>
         <h2 className="text-3xl text-center mt-3">Toys Collection:</h2>
         <FilterToy />
-        {!toys ? <div className='text-4xl'>Loading...</div> : <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
+        {!toys.length ? <div className='text-4xl'>Loading...</div> : <ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
       </main>
     </div>
 
