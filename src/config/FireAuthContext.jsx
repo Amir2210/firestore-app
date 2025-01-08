@@ -7,6 +7,7 @@ export const AuthContext = createContext(null);
 export default function AuthProvider({ children, auth }) {
   const [userFire, setUserFire] = useState({})
   const [toyFilter, setToyFilter] = useState('')
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -21,10 +22,13 @@ export default function AuthProvider({ children, auth }) {
     })
   }, [])
 
+  const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
+
   const globalVal = {
     userFire,
     toyFilter,
-    setToyFilter
+    setToyFilter,
+    isDarkMode, toggleDarkMode
   }
 
   return (
