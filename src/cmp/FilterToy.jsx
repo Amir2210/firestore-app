@@ -13,9 +13,9 @@ export function FilterToy() {
     const timeoutId = setTimeout(() => {
       setDebouncedInputValue(inputValue)
       setToyFilter(debouncedInputValue)
-    }, 1500)
+    }, 500)
     return () => clearTimeout(timeoutId);
-  }, [inputValue, 1500, debouncedInputValue]);
+  }, [inputValue, 500, debouncedInputValue]);
   console.log('debouncedInputValue:', debouncedInputValue)
   return (
     <input type="text" value={inputValue} onChange={handleInputChange} />

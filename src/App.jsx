@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from 'firebase/firestore'
+import { collection, endAt, getDocs, limit, orderBy, query, startAt, where } from 'firebase/firestore'
 import { auth, dbFireStore } from './config/firebase'
 import { useEffect, useState } from 'react'
 import { ToyList } from './cmp/toysList';
@@ -18,19 +18,26 @@ function App() {
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
-  }, [])
+  }, [toyFilter])
 
   const getFireStoreData = async () => {
     try {
       const ref = collection(dbFireStore, "toys")
       //sort by last added
-      const q = query(ref, orderBy('_id', 'desc'))
+      const q = toyFilter
+        ? query(
+          ref,
+          orderBy("name"),
+          startAt(toyFilter),
+          endAt(toyFilter + "\uf8ff")
+        )
+        : query(ref, orderBy("_id", "desc"))
       const snapshot = await getDocs(q)
       // console.log(snapshot.docs)
-      const toysArray = []
-      snapshot.forEach((item) => {
-        toysArray.push({ id: item.id, ...item.data() })
-      })
+      const toysArray = snapshot.docs.map((item) => ({
+        id: item.id,
+        ...item.data(),
+      }));
       setToys(toysArray)
     } catch (error) {
       alert('there was an Error try again')
