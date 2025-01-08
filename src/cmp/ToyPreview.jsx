@@ -26,6 +26,7 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
       <h1>toy name: {toy.name}</h1>
       <h2>price: <span className='font-bold'>{toy.price}₪ NIS</span></h2>
       <h3>info:  {toy.info}</h3>
+      <img className='max-w-28' src={toy.imgUrl} alt={toy.name} />
       <div className=' flex gap-2 items-center'>
         <button onClick={onDeleteToy} className='text-red-600'><IoTrashBin /></button>
         <button onClick={() => {
