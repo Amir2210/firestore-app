@@ -55,7 +55,7 @@ function App() {
     <div className="relative">
       {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
       <main
-        className={`bg-zinc-200 z-0 sm:h-screen px-3 mx-auto ${isModalOpen ? "blur-sm" : "blur-none"}`}>
+        className={`bg-zinc-200 z-0 h-screen px-3 mx-auto ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <div className='flex flex-col gap-5 justify-center items-center pt-4'>
           <h1 className="text-3xl">Firestore Application🔥</h1>
           {userFire?.email ?
