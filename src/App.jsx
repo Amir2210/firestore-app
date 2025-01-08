@@ -59,7 +59,7 @@ function App() {
         <div className='flex flex-col gap-5 justify-center items-center pt-4'>
           <h1 className="text-3xl">Firestore Application🔥</h1>
           {userFire?.email ?
-            <div className='flex flex-col sm:flex-row gap-5 items-center'>
+            <div className='flex sm:flex-row gap-5 items-center'>
               <h3 className='text-xl'>Hello: <span className='font-bold capitalize'>{getNameFromEmail()}</span></h3>
               <button className='bg-red-400 btn' onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
               <Link className='bg-emerald-400 btn' to={'/addToy'}>Add a new Toy</Link>
