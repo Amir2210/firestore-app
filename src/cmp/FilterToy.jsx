@@ -16,8 +16,10 @@ export function FilterToy() {
     }, 500)
     return () => clearTimeout(timeoutId);
   }, [inputValue, 500, debouncedInputValue]);
-  console.log('debouncedInputValue:', debouncedInputValue)
   return (
-    <input type="text" value={inputValue} onChange={handleInputChange} />
+    <div className='my-2'>
+      <label className='block text-gray-700 font-semibold mb-2' htmlFor="filter">Search Toy:</label>
+      <input id='filter' className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 duration-200 focus:ring-blue-500 focus:border-blue-500" type="text" value={inputValue} onChange={handleInputChange} />
+    </div>
   )
 }

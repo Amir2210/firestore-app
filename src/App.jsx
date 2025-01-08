@@ -13,7 +13,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
   const { userFire, toyFilter, setToyFilter } = useFireAuthContext()
-  console.log('toyFilter:', toyFilter)
   const userId = userFire?.uid
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
@@ -23,7 +22,7 @@ function App() {
   const getFireStoreData = async () => {
     try {
       const ref = collection(dbFireStore, "toys")
-      //sort by last added
+      //filter toy
       const q = toyFilter
         ? query(
           ref,
