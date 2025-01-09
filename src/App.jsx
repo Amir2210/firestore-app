@@ -13,12 +13,15 @@ function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
-  const { userFire, toyFilter, isDarkMode } = useFireAuthContext()
+  const { userFire, toyFilter, isDarkMode, getThemeFromLocalStorage } = useFireAuthContext()
   const userId = userFire?.uid
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
+    // getThemeFromLocalStorage()
   }, [toyFilter])
+
+
 
   const getFireStoreData = async () => {
     try {
@@ -51,7 +54,7 @@ function App() {
     greet += userFire.email.slice(0, index)
     return greet
   }
-  console.log('toys:', toys)
+  // console.log('toys:', toys)
 
 
   return (

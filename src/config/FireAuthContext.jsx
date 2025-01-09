@@ -7,12 +7,12 @@ export const AuthContext = createContext(null);
 export default function AuthProvider({ children, auth }) {
   const [userFire, setUserFire] = useState({})
   const [toyFilter, setToyFilter] = useState('')
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage())
 
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("user logged in", user)
+        // console.log("user logged in", user)
         setUserFire(user)
       }
       else {
@@ -22,13 +22,19 @@ export default function AuthProvider({ children, auth }) {
     })
   }, [])
 
-  const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev)
+    localStorage.setItem('theme', !isDarkMode)
+  }
 
+  function getThemeFromLocalStorage() {
+    return localStorage.getItem('theme') === 'true' ? true : false || false
+  }
   const globalVal = {
     userFire,
     toyFilter,
     setToyFilter,
-    isDarkMode, toggleDarkMode
+    isDarkMode, toggleDarkMode, getThemeFromLocalStorage
   }
 
   return (
