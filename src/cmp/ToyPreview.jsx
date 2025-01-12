@@ -27,7 +27,14 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
   }
 
   const addFavoriteToy = async (userId, toy) => {
-    if (!userId || !toy) throw new Error("Invalid userId or toy")
+    if (!userId) {
+      alert('You must log in to make favorite list')
+      return
+    }
+    if (!toy) {
+      alert('Error Toy not found')
+      throw new Error("Invalid r toy")
+    }
 
     const userDocRef = doc(dbFireStore, "users", userId)
     try {
