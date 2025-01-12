@@ -80,9 +80,11 @@ function App() {
                 <h3 className={`text-xl ${isDarkMode ? 'text-zinc-200' : 'text-black'}`}>Hello: <span className='font-bold capitalize'>{getNameFromEmail()}</span></h3>
                 <button className='bg-red-400 btn' onClick={async () => window.confirm('Logout from the site?') && logout()}>logout</button>
               </div>
-              <div className='flex-row flex items-center gap-5'>
-                <Link className='bg-emerald-400 btn' to={'/addToy'}>Add a new Toy</Link>
-                <DarkModebtn />
+              <div className='flex flex-col sm:flex-row items-center gap-5'>
+                <div className='flex flex-row gap-5'>
+                  <Link className='bg-emerald-400 btn' to={'/addToy'}>Add a new Toy</Link>
+                  <DarkModebtn />
+                </div>
                 <ShowFavoriteToys />
               </div>
             </div>
