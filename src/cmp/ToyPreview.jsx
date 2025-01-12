@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useFireAuthContext } from '../config/FireAuthContext'
 
 export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, getFireStoreData }) {
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(toy.isFavorite)
   const { favoriteToys, setFavoriteToys } = useFireAuthContext()
 
 
@@ -32,11 +32,11 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
     const userDocRef = doc(dbFireStore, "users", userId)
     try {
       await updateDoc(userDocRef, {
-        favorites: arrayUnion(toy),
+        favorites: arrayUnion({ ...toy, isFavorite: true }),
       })
       alert(`Toy with ID ${toy._id} added to favorites`)
       setIsFavorite(true)
-      setFavoriteToys([toy, ...favoriteToys,])
+      setFavoriteToys([{ ...toy, isFavorite: true }, ...favoriteToys,])
     } catch (error) {
       console.error("Error adding favorite toy:", error)
     }

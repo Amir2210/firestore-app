@@ -14,13 +14,13 @@ function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
-  const { userFire, toyFilter, isDarkMode, isFavoriteShow, favoriteToys, setFavoriteToys } = useFireAuthContext()
+  const { userFire, toyFilter, isDarkMode, isFavoriteShow, favoriteToys } = useFireAuthContext()
   const userId = userFire?.uid
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
   }, [toyFilter])
-  console.log('favoriteToys:', favoriteToys)
+  // console.log('favoriteToys:', favoriteToys)
 
   const getFireStoreData = async () => {
     try {
@@ -56,7 +56,7 @@ function App() {
 
   function renderToys() {
     if (isFavoriteShow) {
-      return (<ToyList toys={toys} favoriteToys={favoriteToys} isFavoriteShow={isFavoriteShow} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} getFireStoreData={getFireStoreData} />)
+      return (<ToyList toys={toys} setIsModalOpen={setIsModalOpen} setCurrentEditToy={setCurrentEditToy} userId={userId} getFireStoreData={getFireStoreData} />)
     }
     if (!toys.length) {
       return (<div className={`text-4xl ${isDarkMode ? 'text-zinc-200' : 'text-black'}`}>No Toys Found...</div>)
