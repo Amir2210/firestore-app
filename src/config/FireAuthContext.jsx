@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { doc, getDoc } from 'firebase/firestore';
 import { createContext, useContext, useLayoutEffect, useState } from "react";
 // import { auth } from "../config/firebase";
 export const AuthContext = createContext(null);
@@ -8,11 +9,12 @@ export default function AuthProvider({ children, auth }) {
   const [userFire, setUserFire] = useState({})
   const [toyFilter, setToyFilter] = useState('')
   const [isDarkMode, setIsDarkMode] = useState(getThemeFromLocalStorage())
+  const [favoriteToys, setFavoriteToys] = useState([])
+  const [isFavoriteShow, setIsFavoriteShow] = useState(false)
 
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log("user logged in", user)
         setUserFire(user)
       }
       else {
@@ -20,6 +22,7 @@ export default function AuthProvider({ children, auth }) {
         setUserFire(null)
       }
     })
+
   }, [])
 
   const toggleDarkMode = () => {
@@ -30,11 +33,15 @@ export default function AuthProvider({ children, auth }) {
   function getThemeFromLocalStorage() {
     return localStorage.getItem('theme') === 'true' ? true : false || false
   }
+
+
+
   const globalVal = {
     userFire,
     toyFilter,
     setToyFilter,
-    isDarkMode, toggleDarkMode, getThemeFromLocalStorage
+    isDarkMode, toggleDarkMode, getThemeFromLocalStorage,
+    favoriteToys, setFavoriteToys, isFavoriteShow, setIsFavoriteShow
   }
 
   return (

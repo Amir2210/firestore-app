@@ -1,9 +1,15 @@
-import { IoTrashBin } from "react-icons/io5";
-import { MdEdit } from "react-icons/md";
-import { doc, deleteDoc } from 'firebase/firestore'
+import { IoTrashBin } from "react-icons/io5"
+import { MdEdit } from "react-icons/md"
+import { doc, deleteDoc, arrayUnion, updateDoc, arrayRemove, setDoc } from 'firebase/firestore'
 import { dbFireStore } from '../config/firebase'
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io"
+import { useState } from 'react'
+import { useFireAuthContext } from '../config/FireAuthContext'
 
 export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, getFireStoreData }) {
+  const [isFavorite, setIsFavorite] = useState(false)
+  const { favoriteToys, setFavoriteToys } = useFireAuthContext()
+
 
   async function onDeleteToy() {
     if (userId !== toy.userId) {
@@ -17,6 +23,40 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
     } catch (error) {
       alert('sorry cant delete toy try again later...')
       console.log('error:', error)
+    }
+  }
+
+  const addFavoriteToy = async (userId, toy) => {
+    if (!userId || !toy) throw new Error("Invalid userId or toy")
+
+    const userDocRef = doc(dbFireStore, "users", userId)
+    try {
+      await updateDoc(userDocRef, {
+        favorites: arrayUnion(toy),
+      })
+      alert(`Toy with ID ${toy._id} added to favorites`)
+      setIsFavorite(true)
+      setFavoriteToys([toy, ...favoriteToys,])
+    } catch (error) {
+      console.error("Error adding favorite toy:", error)
+    }
+  }
+
+  const removeFavoriteToy = async (userId, toy) => {
+    if (!userId || !toy) throw new Error("Invalid userId or toy")
+
+    const userDocRef = doc(dbFireStore, "users", userId)
+    try {
+
+      await updateDoc(userDocRef, {
+        favorites: arrayRemove(toy),
+      })
+      alert(`Toy with ID ${toy._id} removed from favorites`)
+      setIsFavorite(false)
+      const filteredToys = favoriteToys.filter((t) => t._id !== toy._id)
+      setFavoriteToys(filteredToys)
+    } catch (error) {
+      console.error("Error removing favorite toy:", error)
     }
   }
 
@@ -39,6 +79,9 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
         }
         } className='text-blue-600'><MdEdit />
         </button>
+        {isFavorite ?
+          <button onClick={() => removeFavoriteToy(userId, toy)}><IoMdHeart className='text-red-400' /></button>
+          : <button onClick={() => addFavoriteToy(userId, toy)}><IoMdHeartEmpty className='' /></button>}
       </div>
     </li>
   )
