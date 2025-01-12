@@ -20,7 +20,7 @@ export default function AuthProvider({ children, auth }) {
         fetchFavorites(user)
       }
       else {
-        console.log("logged out");
+        // console.log("logged out")
         setUserFire(null)
       }
     })

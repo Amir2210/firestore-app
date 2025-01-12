@@ -38,12 +38,22 @@ export function ToyPreview({ toy, setIsModalOpen, setCurrentEditToy, userId, get
 
     const userDocRef = doc(dbFireStore, "users", userId)
     try {
-      await updateDoc(userDocRef, {
-        favorites: arrayUnion({ ...toy, isFavorite: true }),
-      })
-      alert(`Toy with ID ${toy._id} added to favorites`)
-      setIsFavorite(true)
-      setFavoriteToys([{ ...toy, isFavorite: true }, ...favoriteToys,])
+      if (!favoriteToys.length) {
+        await setDoc(userDocRef, { favorites: [] }, { merge: true })
+        await updateDoc(userDocRef, {
+          favorites: arrayUnion({ ...toy, isFavorite: true }),
+        })
+        alert(`Toy with ID ${toy._id} added to favorites`)
+        setIsFavorite(true)
+        setFavoriteToys([{ ...toy, isFavorite: true }, ...favoriteToys,])
+      } else {
+        await updateDoc(userDocRef, {
+          favorites: arrayUnion({ ...toy, isFavorite: true }),
+        })
+        alert(`Toy with ID ${toy._id} added to favorites`)
+        setIsFavorite(true)
+        setFavoriteToys([{ ...toy, isFavorite: true }, ...favoriteToys,])
+      }
     } catch (error) {
       console.error("Error adding favorite toy:", error)
     }

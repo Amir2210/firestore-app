@@ -48,7 +48,7 @@ export const useLogoutFire = (auth) => {
   const logout = async () => {
     try {
       await signOut(auth);
-      console.log("logged out")
+      // console.log("logged out")
       setFavoriteToys([])
       navigate('/login')
       return "log out"
