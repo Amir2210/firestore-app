@@ -71,7 +71,7 @@ function App() {
     <div className="relative">
       {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} currentEditToy={currentEditToy} userId={userId} getFireStoreData={getFireStoreData} />}
       <main
-        className={`${isDarkMode ? 'bg-zinc-800' : 'bg-zinc-200'} z-0 h-full px-3 mx-auto duration-700 ease-in ${isModalOpen ? "blur-sm" : "blur-none"}`}>
+        className={`${isDarkMode ? 'bg-zinc-800' : 'bg-zinc-200'} z-0 min-h-screen px-3 mx-auto duration-700 ease-in ${isModalOpen ? "blur-sm" : "blur-none"}`}>
         <div className='flex flex-col gap-5 justify-center items-center pt-4'>
           <h1 className={`text-3xl ${isDarkMode ? 'text-zinc-200' : 'text-black'}`}>Firestore Application🔥</h1>
           {userFire?.email ?
