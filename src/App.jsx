@@ -14,13 +14,12 @@ function App() {
   const [toys, setToys] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentEditToy, setCurrentEditToy] = useState(null)
-  const { userFire, toyFilter, isDarkMode, isFavoriteShow, favoriteToys } = useFireAuthContext()
+  const { userFire, toyFilter, isDarkMode, isFavoriteShow } = useFireAuthContext()
   const userId = userFire?.uid
   const { logout } = useLogoutFire(auth)
   useEffect(() => {
     getFireStoreData()
   }, [toyFilter])
-  // console.log('favoriteToys:', favoriteToys)
 
   const getFireStoreData = async () => {
     try {
