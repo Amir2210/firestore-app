@@ -1,5 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState } from "react";
+import { useFireAuthContext } from './FireAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const useSignupFire = (auth) => {
   // will show if there error and what is the error
@@ -41,12 +43,15 @@ export const useLoginFire = (auth) => {
 }
 
 export const useLogoutFire = (auth) => {
+  const { setFavoriteToys } = useFireAuthContext()
+  const navigate = useNavigate()
   const logout = async () => {
     try {
       await signOut(auth);
       console.log("logged out")
+      setFavoriteToys([])
+      navigate('/login')
       return "log out"
-
     }
     catch (err) {
       console.log(err.message)

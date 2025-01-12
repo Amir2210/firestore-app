@@ -32,7 +32,7 @@ export function Signup() {
         <input ref={passwordRef} type="password" className='mx-2' />
         <h3 className='text-red-500'>{error}</h3>
         <button className='bg-green-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Signup</button>
-        <button onClick={() => navigate('/')} className='bg-violet-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Back</button>
+        <button onClick={() => navigate('/')} className='bg-violet-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Home Page</button>
       </form>
 
     </main>

@@ -31,7 +31,7 @@ export function Login() {
         <input ref={passwordRef} type="password" className='mx-2' />
         <h2 className='text-red-500'>{error}</h2>
         <button className='bg-blue-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Login</button>
-        <button onClick={() => navigate('/')} className='bg-violet-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Back</button>
+        <button onClick={() => navigate('/')} className='bg-violet-400 p-2 py-3 rounded-md text-white mt-4  shadow-md'>Home Page</button>
       </form>
 
     </main>
